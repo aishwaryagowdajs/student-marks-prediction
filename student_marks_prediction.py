@@ -1,11 +1,19 @@
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# Load dataset
-df = pd.read_csv("student_data.csv")
+# Create dataset
+df = pd.DataFrame({
+    "Study_Hours": [2, 3, 4, 5, 6, 7, 8],
+    "Marks": [30, 40, 50, 60, 70, 80, 90]
+})
+
+# Save dataset
+df.to_csv("student_data.csv", index=False)
+
+# Display dataset
+print("Student Dataset:")
 print(df.head())
 
 # Input and output
@@ -22,7 +30,7 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 
 # Check model performance
-print("Model R2 Score:", model.score(X_test, y_test))
+print("\nModel R2 Score:", round(model.score(X_test, y_test), 2))
 
 # Predict marks
 hours = pd.DataFrame({"Study_Hours": [7.5]})
@@ -46,4 +54,5 @@ plt.xlabel("Study Hours")
 plt.ylabel("Marks")
 plt.title("Student Marks Prediction")
 plt.legend()
+plt.grid(True)
 plt.show()
